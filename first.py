@@ -108,41 +108,42 @@ class SquareTest(unittest.TestCase):
         flg = np.allclose(x.grad, num_grad)
         self.assertTrue(flg)
 
-x = Variable(np.array(0.5))
-a = square(x)
-b = exp(a)
-y = square(b)
+if __name__ == '__main__':
+    x = Variable(np.array(0.5))
+    a = square(x)
+    b = exp(a)
+    y = square(b)
 
-# assert y.creator == C
-assert y.creator.input == b
-# assert y.creator.input.creator == B
-assert y.creator.input.creator.input == a
-# assert y.creator.input.creator.input.creator == A
-assert y.creator.input.creator.input.creator.input == x
+    # assert y.creator == C
+    assert y.creator.input == b
+    # assert y.creator.input.creator == B
+    assert y.creator.input.creator.input == a
+    # assert y.creator.input.creator.input.creator == A
+    assert y.creator.input.creator.input.creator.input == x
 
-# b.grad = C.backward(y.grad)
-# a.grad = B.backward(b.grad)
-# x.grad = A.backward(a.grad)
-# print(x.grad)
+    # b.grad = C.backward(y.grad)
+    # a.grad = B.backward(b.grad)
+    # x.grad = A.backward(a.grad)
+    # print(x.grad)
 
-# C = y.creator
-# b = C.input
-# b.grad = C.backward(y.grad)
+    # C = y.creator
+    # b = C.input
+    # b.grad = C.backward(y.grad)
 
-# B = b.creator
-# a = B.input
-# a.grad = B.backward(b.grad)
+    # B = b.creator
+    # a = B.input
+    # a.grad = B.backward(b.grad)
 
-# A = a.creator
-# x = A.input
-# x.grad = A.backward(a.grad)
-# print(x.grad)
+    # A = a.creator
+    # x = A.input
+    # x.grad = A.backward(a.grad)
+    # print(x.grad)
 
-# y.backward()
-# print(x.grad)
+    # y.backward()
+    # print(x.grad)
 
-y = square(exp(square(x)))
-y.backward()
-print(x.grad)
+    y = square(exp(square(x)))
+    y.backward()
+    print(x.grad)
 
-unittest.main()
+    unittest.main()
